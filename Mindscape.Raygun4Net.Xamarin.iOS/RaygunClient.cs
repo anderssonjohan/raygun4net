@@ -644,7 +644,7 @@ namespace Mindscape.Raygun4Net
 
     private string _sessionId;
 
-    public void SendPulseEvent(RaygunPulseEventType type)
+    internal void SendPulseEvent(RaygunPulseEventType type)
     {
       RaygunPulseMessage message = new RaygunPulseMessage();
       RaygunPulseDataMessage data = new RaygunPulseDataMessage();
@@ -679,7 +679,7 @@ namespace Mindscape.Raygun4Net
       Send(message);
     }
 
-    public void SendPulsePageTimingEvent(string name, decimal duration)
+    internal void SendPulsePageTimingEvent(string name, decimal duration)
     {
       if(_sessionId == null) {
         SendPulseEvent(RaygunPulseEventType.SessionStart);
@@ -740,7 +740,7 @@ namespace Mindscape.Raygun4Net
       return version;
     }
 
-    public void Send(RaygunPulseMessage raygunPulseMessage)
+    private void Send(RaygunPulseMessage raygunPulseMessage)
     {
       if (ValidateApiKey())
       {
