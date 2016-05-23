@@ -461,6 +461,7 @@ namespace Mindscape.Raygun4Net
         {
           WriteExceptionInformation (_client._reporter.NextReportUUID, e.Exception);
         }
+        Pulse.SendRemainingViews();
       }
     }
 
@@ -473,6 +474,7 @@ namespace Mindscape.Raygun4Net
         {
           WriteExceptionInformation (_client._reporter.NextReportUUID, e.ExceptionObject as Exception);
         }
+        Pulse.SendRemainingViews();
       }
     }
 
@@ -702,6 +704,11 @@ namespace Mindscape.Raygun4Net
       }
       data.SessionId = _sessionId;
       Send(message);
+    }
+
+    internal void SendPulsePageTimingEventNow(string name, decimal duration)
+    {
+      SendPulsePageTimingEventCore(name, duration);
     }
 
     internal void SendPulsePageTimingEvent(string name, decimal duration)
